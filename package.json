@@ -1,0 +1,23 @@
+{
+  "name": "server-sent-events",
+  "version": "1.0.0",
+  "description": "Example of using Server-Sent Events",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corocoto/server-sent-events.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/corocoto/server-sent-events/issues"
+  },
+  "homepage": "https://github.com/corocoto/server-sent-events#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
