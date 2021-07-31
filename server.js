@@ -4,6 +4,9 @@ const path = require('path');
 const crypto = require('crypto');
 const pid = process.pid;
 
+
+let data = crypto.randomBytes(16).toString('hex');
+
 function sse(req, res) {
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
@@ -11,9 +14,12 @@ function sse(req, res) {
 
     let id = 0;
     const intervalTimer = setInterval(() => {
-        res.write(`data: ${crypto.randomBytes(16).toString('hex')}\n`);
-        res.write(`id: ${++id} \n`);
-        res.write("\n");
+
+        if (data !== undefined && data !== '') {
+            res.write(`data: ${data}\n`);
+            res.write(`id: ${++id} \n`);
+            res.write("\n");
+        }
     }, 1000);
 
     const timoutTimer = setTimeout(() => {
@@ -32,6 +38,12 @@ const server = http.createServer((req, res) => {
 
     if (url.pathname === '/stream') {
         sse(req, res);
+        return;
+    }
+
+    if (url.pathname === '/send-message') {
+        data = url.searchParams.get('message');
+        res.end(data);
         return;
     }
 
